@@ -1,18 +1,84 @@
 .navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   height: 10vh;
-  border: 2px solid black;
+  box-shadow: 0px 2px 5px gray;
 }
+.title {
+  width: 30%;
+}
+.statistics {
+  display: flex;
+  justify-content: space-evenly;
+  margin: auto;
+  width: 70%;
+}
+
 .game {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   height: 80vh;
-  border: 2px solid black;
 }
 
 .board {
-  height: 50%;
-  width: 25;
+  height: 350px;
+  width: 350px;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
   box-shadow: 6px 6px 10px gray;
+}
+
+.tile {
+  width: 110px;
+  height: 110px;
+  cursor: pointer;
+}
+
+.left-top {
+  border-right: 5px solid black;
+  border-bottom: 5px solid black;
+}
+
+.middle-top {
+  border-left: 5px solid black;
+  border-right: 5px solid black;
+  border-bottom: 5px solid black;
+}
+.right-top {
+  border-left: 5px solid black;
+  border-bottom: 5px solid black;
+}
+
+.left-center {
+  border-top: 5px solid black;
+  border-right: 5px solid black;
+  border-bottom: 5px solid black;
+}
+.middle-center {
+  border: 5px solid black;
+}
+.right-center {
+  border-top: 5px solid black;
+  border-left: 5px solid black;
+  border-bottom: 5px solid black;
+}
+
+.left-bottom {
+  border-right: 5px solid black;
+  border-top: 5px solid black;
+}
+
+.middle-bottom {
+  border-left: 5px solid black;
+  border-right: 5px solid black;
+  border-top: 5px solid black;
+}
+.right-bottom {
+  border-left: 5px solid black;
+  border-top: 5px solid black;
 }

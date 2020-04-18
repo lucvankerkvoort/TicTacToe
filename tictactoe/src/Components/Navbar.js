@@ -10,7 +10,9 @@ class Navbar extends React.Component {
     const { user1, user2, score } = this.state;
     return (
       <div className="navbar">
-        <h1>Tic Tac Toe</h1>
+        <div className="title">
+          <h1>Tic Tac Toe</h1>
+        </div>
         <div className="statistics">
           <h2>Player1:{user1}</h2>
           <h2>Player2:{user2}</h2>
