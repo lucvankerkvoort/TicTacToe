@@ -91,7 +91,7 @@
   font-weight: bold;
 }
 
-.login-modal {
+.screen {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -102,7 +102,7 @@
   box-shadow: 6px 6px 5px gray;
 }
 
-.login {
+.wrapper {
   display: flex;
   justify-content: center;
   align-items: center;

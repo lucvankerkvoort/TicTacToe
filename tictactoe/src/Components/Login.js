@@ -20,8 +20,8 @@ class Login extends React.Component {
   };
   render() {
     return (
-      <div className="login">
-        <div className="login-modal">
+      <div className="wrapper">
+        <div className="screen">
           <form>
             <div className="form-group">
               <label>Name Player1</label>

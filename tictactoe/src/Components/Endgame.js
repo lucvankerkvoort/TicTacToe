@@ -12,8 +12,8 @@ class Endgame extends React.Component {
     const { winner } = this.props;
     const { tied, playerWin } = this.state;
     return (
-      <div className="login">
-        <div className="login-modal">
+      <div className="wrapper">
+        <div className="screen">
           <p> {winner === "Tied" ? tied : playerWin} </p>
           <button className="btn btn-primary" onClick={this.handleClick}>
             Wanna try again?
