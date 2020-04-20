@@ -45,46 +45,70 @@
   font-weight: bold;
 }
 
-.left-top {
+#tile0 {
   border-right: 5px solid black;
   border-bottom: 5px solid black;
 }
 
-.middle-top {
+#tile1 {
   border-left: 5px solid black;
   border-right: 5px solid black;
   border-bottom: 5px solid black;
 }
-.right-top {
+#tile2 {
   border-left: 5px solid black;
   border-bottom: 5px solid black;
 }
-
-.left-center {
+#tile3 {
   border-top: 5px solid black;
   border-right: 5px solid black;
   border-bottom: 5px solid black;
 }
-.middle-center {
+#tile4 {
   border: 5px solid black;
 }
-.right-center {
+#tile5 {
   border-top: 5px solid black;
   border-left: 5px solid black;
   border-bottom: 5px solid black;
 }
-
-.left-bottom {
+#tile6 {
   border-right: 5px solid black;
   border-top: 5px solid black;
 }
-
-.middle-bottom {
+#tile7 {
   border-left: 5px solid black;
   border-right: 5px solid black;
   border-top: 5px solid black;
 }
-.right-bottom {
+#tile8 {
   border-left: 5px solid black;
   border-top: 5px solid black;
+}
+
+.game p {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 400px) {
+  .title {
+    display: flex;
+    font-size: 0.6em;
+    justify-content: center;
+    margin: 0px;
+    padding: 0px;
+    align-items: center;
+  }
+  .statistics {
+    display: flex;
+    font-size: 0.6em;
+  }
+}
+
+.login {
+  height: 100vh;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  position: fixed;
 }

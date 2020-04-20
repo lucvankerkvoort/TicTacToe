@@ -1,10 +1,11 @@
 import React from "react";
-import Board from "../Components/Board";
+import Board from "./Board";
 
 class Game extends React.Component {
   state = {
     player1: true,
     player2: false,
+    check: true,
   };
 
   handleTurn = (firstPlayer, firstBoolean, secondPlayer, secondBoolean) => {

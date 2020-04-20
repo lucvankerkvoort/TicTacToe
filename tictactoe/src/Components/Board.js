@@ -1,191 +1,149 @@
 import React from "react";
 
 class Board extends React.Component {
-  handleClick = (event) => {
-    const { player1, player2, turn, handleScore } = this.props;
-    let tile = event.target;
+  generateTiles = () => {
+    let allTiles = [];
+    for (let i = 0; i < 9; i++) {
+      allTiles.push("tile not-played");
+    }
+    return allTiles;
+  };
 
-    if (tile.innerHTML === "") {
-      if (player1) {
-        tile.innerHTML += "X";
-        tile.classList.remove("played");
-        turn("player2", true, "player1", false);
-        if (this.diagonal("X") || this.row("X") || this.column("X")) {
-          handleScore("player1");
-          this.reset();
-        }
-      }
-      if (player2) {
-        tile.innerHTML += "O";
-        tile.classList.remove("played");
-        turn("player1", true, "player2", false);
-        if (this.diagonal("O") || this.row("O") || this.column("O")) {
-          handleScore("player2");
-          this.reset();
-        }
-      }
+  handleClick = (event) => {
+    const { handleScore } = this.props;
+    let tile = event.target;
+    if (tile.classList.length === 2) {
+      this.play(tile);
     }
 
-    let allTiles = document.getElementsByClassName("played");
+    let allTiles = document.getElementsByClassName("not-played");
     if (allTiles.length < 1) {
       handleScore("ties");
       this.reset();
     }
   };
 
-  diagonal = (player) => {
-    let topLeft = document.getElementsByClassName("left-top")[0];
-    let middleCenter = document.getElementsByClassName("middle-center")[0];
-    let bottomRight = document.getElementsByClassName("right-bottom")[0];
-    let bottomLeft = document.getElementsByClassName("left-bottom")[0];
-    let topRight = document.getElementsByClassName("right-top")[0];
-
-    if (
-      topLeft.innerHTML === player &&
-      middleCenter.innerHTML === player &&
-      bottomRight.innerHTML === player
-    ) {
-      return true;
-    } else if (
-      topRight.innerHTML === player &&
-      middleCenter.innerHTML === player &&
-      bottomLeft.innerHTML === player
-    ) {
-      return true;
+  play = (tile) => {
+    const { player1, player2, turn, handleScore } = this.props;
+    tile.classList.remove("not-played");
+    if (player1) {
+      tile.innerHTML = "X";
+      turn("player1", false, "player2", true);
+      if (this.diagonal("X") || this.row("X") || this.column("X")) {
+        handleScore("player1");
+        this.reset();
+      }
     }
-
-    return false;
+    if (player2) {
+      tile.innerHTML = "O";
+      turn("player2", false, "player1", true);
+      if (this.diagonal("O") || this.row("O") || this.column("O")) {
+        handleScore("player2");
+        this.reset();
+      }
+    }
   };
 
-  row = (player) => {
-    let leftTop = document.getElementsByClassName("left-top")[0];
-    let middleTop = document.getElementsByClassName("middle-top")[0];
-    let rightTop = document.getElementsByClassName("right-top")[0];
+  diagonal = (play) => {
+    let left = [
+      document.getElementById("tile0").innerHTML,
+      document.getElementById("tile4").innerHTML,
+      document.getElementById("tile8").innerHTML,
+    ];
+    let right = [
+      document.getElementById("tile2").innerHTML,
+      document.getElementById("tile4").innerHTML,
+      document.getElementById("tile6").innerHTML,
+    ];
 
-    let leftCenter = document.getElementsByClassName("left-center")[0];
-    let middleCenter = document.getElementsByClassName("middle-center")[0];
-    let rightCenter = document.getElementsByClassName("right-center")[0];
-
-    let leftBottom = document.getElementsByClassName("left-bottom")[0];
-    let middleBottom = document.getElementsByClassName("middle-bottom")[0];
-    let rightBottom = document.getElementsByClassName("right-bottom")[0];
-
-    if (
-      leftTop.innerHTML === player &&
-      middleTop.innerHTML === player &&
-      rightTop.innerHTML === player
-    ) {
+    if (left[0] === play && left[1] === play && left[2] === play) {
       return true;
-    } else if (
-      leftCenter.innerHTML === player &&
-      middleCenter.innerHTML === player &&
-      rightCenter.innerHTML === player
-    ) {
-      return true;
-    } else if (
-      leftBottom.innerHTML === player &&
-      middleBottom.innerHTML === player &&
-      rightBottom.innerHTML === player
-    ) {
+    }
+    if (right[0] === play && right[1] === play && right[2] === play) {
       return true;
     }
     return false;
   };
 
-  column = (player) => {
-    let leftTop = document.getElementsByClassName("left-top")[0];
-    let middleTop = document.getElementsByClassName("middle-top")[0];
-    let rightTop = document.getElementsByClassName("right-top")[0];
+  row = (play) => {
+    let row1 = [
+      document.getElementById("tile0").innerHTML,
+      document.getElementById("tile1").innerHTML,
+      document.getElementById("tile2").innerHTML,
+    ];
+    let row2 = [
+      document.getElementById("tile3").innerHTML,
+      document.getElementById("tile4").innerHTML,
+      document.getElementById("tile5").innerHTML,
+    ];
+    let row3 = [
+      document.getElementById("tile6").innerHTML,
+      document.getElementById("tile7").innerHTML,
+      document.getElementById("tile8").innerHTML,
+    ];
 
-    let leftCenter = document.getElementsByClassName("left-center")[0];
-    let middleCenter = document.getElementsByClassName("middle-center")[0];
-    let rightCenter = document.getElementsByClassName("right-center")[0];
-
-    let leftBottom = document.getElementsByClassName("left-bottom")[0];
-    let middleBottom = document.getElementsByClassName("middle-bottom")[0];
-    let rightBottom = document.getElementsByClassName("right-bottom")[0];
-
-    if (
-      leftTop.innerHTML === player &&
-      leftCenter.innerHTML === player &&
-      leftBottom.innerHTML === player
-    ) {
-      return true;
-    } else if (
-      middleTop.innerHTML === player &&
-      middleCenter.innerHTML === player &&
-      middleBottom.innerHTML === player
-    ) {
-      return true;
-    } else if (
-      rightTop.innerHTML === player &&
-      rightCenter.innerHTML === player &&
-      rightBottom.innerHTML === player
-    ) {
+    if (row1[0] === play && row1[1] === play && row1[2] === play) {
       return true;
     }
+    if (row2[0] === play && row2[1] === play && row2[2] === play) {
+      return true;
+    }
+    if (row3[0] === play && row3[1] === play && row3[2] === play) {
+      return true;
+    }
+    return false;
+  };
 
+  column = (play) => {
+    let column1 = [
+      document.getElementById("tile0").innerHTML,
+      document.getElementById("tile3").innerHTML,
+      document.getElementById("tile6").innerHTML,
+    ];
+    let column2 = [
+      document.getElementById("tile1").innerHTML,
+      document.getElementById("tile4").innerHTML,
+      document.getElementById("tile7").innerHTML,
+    ];
+    let column3 = [
+      document.getElementById("tile2").innerHTML,
+      document.getElementById("tile5").innerHTML,
+      document.getElementById("tile8").innerHTML,
+    ];
+
+    if (column1[0] === play && column1[1] === play && column1[2] === play) {
+      return true;
+    }
+    if (column2[0] === play && column2[1] === play && column2[2] === play) {
+      return true;
+    }
+    if (column3[0] === play && column3[1] === play && column3[2] === play) {
+      return true;
+    }
     return false;
   };
 
   reset = () => {
     let allTiles = document.getElementsByClassName("tile");
-
     for (let i = 0; i < allTiles.length; i++) {
       allTiles[i].innerHTML = "";
-      allTiles[i].classList.add("played");
+      allTiles[i].classList.add("not-played");
     }
   };
+
   render() {
     return (
       <div className="board">
-        <div
-          id="1"
-          className="tile left-top played"
-          onClick={this.handleClick}
-        ></div>
-        <div
-          id="2"
-          className="tile middle-top played"
-          onClick={this.handleClick}
-        ></div>
-        <div
-          id="3"
-          className="tile right-top played"
-          onClick={this.handleClick}
-        ></div>
-
-        <div
-          id="4"
-          className="tile left-center played"
-          onClick={this.handleClick}
-        ></div>
-        <div
-          id="5"
-          className="tile middle-center played"
-          onClick={this.handleClick}
-        ></div>
-        <div
-          id="6"
-          className="tile right-center played"
-          onClick={this.handleClick}
-        ></div>
-
-        <div
-          id="7"
-          className="tile left-bottom played"
-          onClick={this.handleClick}
-        ></div>
-        <div
-          id="8"
-          className="tile middle-bottom played"
-          onClick={this.handleClick}
-        ></div>
-        <div
-          id="9"
-          className="tile right-bottom played"
-          onClick={this.handleClick}
-        ></div>
+        {this.generateTiles().map((element, i) => {
+          return (
+            <div
+              id={`tile${i}`}
+              key={i}
+              className={element}
+              onClick={this.handleClick}
+            />
+          );
+        })}
       </div>
     );
   }
